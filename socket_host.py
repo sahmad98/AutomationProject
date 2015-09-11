@@ -21,12 +21,13 @@ except socket.error:
 
 s.listen(5)
 c,a = s.accept()
-if(c in configuration['allowed_ip']):
+print a
+if(a[0] in configuration['allowed_ip']):
 	print 'Got Connection from:',a
 	data = ''
 	while(data != 'Close'):
 		data =  c.recv(1024)
-    	print data   
+	    	print data   
 	c.close() 
 else:
 	print 'Invalid IP connection request'
