@@ -30,7 +30,8 @@ if(a[0] in configuration['allowed_ip']):
 		try:
 			data =  c.recv(1024)
 			print data
-		except KeyboardIterrupt:
+		except KeyboardInterrupt:
+			break
 	c.close() 
 
 else:
