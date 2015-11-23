@@ -49,5 +49,6 @@ if(a[0] in configuration['allowed_ip']):
 else:
 	print 'Invalid IP connection request'
 	c.close()
+
 s.close()
 
