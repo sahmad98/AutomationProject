@@ -24,11 +24,17 @@ c,a = s.accept()
 print a
 if(a[0] in configuration['allowed_ip']):
 	print 'Got Connection from:',a
+	print 'Press Ctrl-C for exit'
+	s.send('Welcome to Beaglebone HomeAutomation Server')
 	data = ''
 	while(data != 'Close'):
-		data =  c.recv(1024)
-	    	print data   
+		try:
+			data =  c.recv(1024)
+	    	print data
+	    except KeyboardIterrupt:
+	    	break   
 	c.close() 
+
 else:
 	print 'Invalid IP connection request'
 	c.close()
