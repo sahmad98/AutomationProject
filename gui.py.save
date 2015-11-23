@@ -7,18 +7,16 @@ import sys
 s = socket.socket()
 args = sys.argv
 
-if(len(args) >= 2):
+if(len(args) > 2):
 	try:
 		print 'Connecting to', args[1]
 		s.connect((args[1], 1234))   #Connects bealgebone on 1234 Port
-		print 'Connected'
 	except socket.error as e:
 		print e
 else:
 	try:
-		print 'Connecting to 192.168.7.2'
 		s.connect(('192.168.7.2',1234))
-		print 'Connected'
+		print 'Connected to 192.168.7.2'
 	except socket.error as e:
 		print e
 
