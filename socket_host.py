@@ -1,17 +1,35 @@
+#!/usr/bin/python
 import socket
 
+conf = open('socket_host.conf','r')       
+configuration = {}
+for line in conf:
+	if(line[0] != '#'):
+		line = line.split(':')
+		configuration[line[0]] = line[1].strip().split(',')
+
+print configuration
 s = socket.socket()
 host = '192.168.7.2'
 port = 1234
-s.bind((host, port))
+try:
+	s.bind((host, port))
+	print 'Server running at ' + host + ':' +str(port)
+except socket.error:
+	s.bind(('localhost',1234))
+	print 'Server running at localhost' + ':' +str(port)
 
 s.listen(5)
 c,a = s.accept()
-print 'Got Connection from:',a
-data = ''
-while(data != 'Close'):
-    c.send('Hello from Server')
-    data =  c.recv(1024)
-    print data   
-   
-c.close() 
+if(c in configuration['allowed_ip']):
+	print 'Got Connection from:',a
+	data = ''
+	while(data != 'Close'):
+		data =  c.recv(1024)
+    	print data   
+	c.close() 
+else:
+	print 'Invalid IP connection request'
+	c.close()
+s.close()
+
