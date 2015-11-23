@@ -25,14 +25,12 @@ print a
 if(a[0] in configuration['allowed_ip']):
 	print 'Got Connection from:',a
 	print 'Press Ctrl-C for exit'
-	s.send('Welcome to Beaglebone HomeAutomation Server')
 	data = ''
 	while(data != 'Close'):
 		try:
 			data =  c.recv(1024)
-	    	print data
-	    except KeyboardIterrupt:
-	    	break   
+			print data
+		except KeyboardIterrupt:
 	c.close() 
 
 else:
