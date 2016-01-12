@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+#Finally this file should be compiled and made into an 
+#executable using freeze so that no changes into code can be done.
 import sqlite3
 import os
 import sys
