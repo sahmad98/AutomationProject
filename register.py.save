@@ -1,0 +1,33 @@
+#!/usr/bin/python
+
+import sqlite3
+import os
+import sys
+
+if os.getuid() != 0:
+	print 'Reqire administrative privilages.'
+	sys.exit(-1)
+
+welcome = '''
+-------------------------------------------------------------
+Welcome to Registration Service of Bealgebone Home Automation
+-------------------------------------------------------------
+Created by: Saleem Ahmad
+GitHub: @sahmad98
+
+Type help - For help about different topics
+For creating a new user Type create [name] [pass] [username]
+'''
+
+print welcome
+command = ['']
+while(command[0] != 'exit'):
+	print 'server>>>', 
+	command = raw_input()
+	command = command.split()
+	print command
+	op = command[0]
+	if(op == 
+		else:
+			
+			createNewUser(command[1], command[2], command[3])

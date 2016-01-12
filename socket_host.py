@@ -1,8 +1,16 @@
 #!/usr/bin/python
 import socket
 
+#Function Definitios
+def light_on():
+	print 'Light On'
+
+def light_off():
+	print 'Lignt Off'
+
 #Read Configuration file and save in configuration dictionary
-#configuration contains key-value pair or different settings with value in a form of list of strings
+#configuration contains key-value pair or different settings 
+#with value in a form of list of strings
 conf = open('socket_host.conf','r')       
 configuration = {}
 print 'Configurations:'
@@ -41,11 +49,17 @@ if(a[0] in configuration['allowed_ip']):
 	while(data != 'Close'):
 		try:
 			data =  c.recv(1024)
-			print data
+			if(data == 'Light On'):
+				if(configuration['debug'] == 'true'):
+					print 'Recieved Command -', data
+				light_on()
+			elif(data == 'Light Off'):
+				if(configuration['debug'] == 'true'):
+					print 'Recieved Command -', data
+				light_off()
 		except KeyboardInterrupt:
 			break
 	c.close() 
-
 else:
 	print 'Invalid IP connection request'
 	c.close()
