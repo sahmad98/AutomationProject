@@ -6,6 +6,7 @@ import sqlite3
 import os
 import sys
 import hashlib
+import getpass
 
 if os.getuid() != 0:
 	print 'Reqire administrative privilages.'
@@ -19,8 +20,9 @@ Created by: Saleem Ahmad
 GitHub: @sahmad98
 
 Type help - For help about different topics
-For creating a new user Type create [name] [username] [passward]
+For creating a new user Type create [name] [username]
 '''
+
 def createNewUser(name, username, passward):
 	db = sqlite3.connect('logins')
 	cur = db.cursor()
@@ -79,14 +81,16 @@ op = ''
 while(op != 'exit'):
 	print 'server>>>', 
 	command = raw_input()
+
 	command = command.split()
 	if(len(command) > 0):
 		op = command[0]
 		if(op == 'create'):
-			if(len(command) != 4):
-				print "3 arguments needed - [name] [username] [passward]"
+			if(len(command) != 3):
+				print "2 arguments needed - [name] [username]"
 			else:
-				createNewUser(command[1], command[2], command[3])
+				pwd = getpass.getpass()
+				createNewUser(command[1], command[2], pwd)
 		elif(op == 'users'):
 			getUserList()
 		elif(op == 'delete'):
